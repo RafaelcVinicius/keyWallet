@@ -1,0 +1,64 @@
+version: "3.7"
+
+services:
+  # Image project
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-wallet
+    image: app-laravel
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    networks:
+      - network
+
+  # Nginx
+  nginx:
+    depends_on:
+      - app
+    container_name: wallet-nginx
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "93:80"
+    volumes:
+      - ./:/var/www/
+      - ./.docker-compose/nginx/:/etc/nginx/conf.d/
+    networks:
+      - network
+
+  # MariaDB
+  db:
+    image: mariadb:10.3
+    container_name: wallet-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql/
+      - ./.docker-compose/db/mysql.cnf:/etc/mysql/
+      - ./.docker-compose/db/schemas.sql:/docker-entrypoint-initdb.d/
+    ports:
+      - "3309:3306"
+    networks:
+      - network
+
+# networks:
+#   networks-app:
+#       driver: bridge
+networks:
+  network:
+    external:
+      name: infra-nginx_network
+
+volumes:
+  database:
+    driver: local

@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  app:
+    container_name: app-wallet-front
+    build:
+      context: ./
+    ports:
+      - 8090:9000
+    networks:
+      - network
+    volumes:
+      - /etc/ssl/certs:/etc/ssl/certs
+      - /etc/ssl/private:/etc/ssl/private
+
+networks:
+  network:
+    external:
+      name: infra-nginx_network
