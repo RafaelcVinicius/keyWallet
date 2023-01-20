@@ -1,12 +1,21 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="column items-center" style="height: 150px; width: 300px">
+    <div class="column items-center" style="height: 200px; width: 300px">
+      <div class="col">
+        <q-input
+          :size="30"
+          outlined
+          v-model="dados.name"
+          @keyup.enter="register"
+          label="Name"
+        />
+      </div>
       <div class="col">
         <q-input
           :size="30"
           outlined
           v-model="dados.email"
-          @keyup.enter="logar"
+          @keyup.enter="register"
           label="E-mail"
         />
       </div>
@@ -16,7 +25,6 @@
           outlined
           v-model="dados.password"
           label="Password"
-          @keyup.enter="logar"
         />
       </div>
       <div class="col">
@@ -26,8 +34,8 @@
           no-caps
           flat
           label="Entrar"
-          @click="logar"
-          @keyup.enter="logar"
+          @click="register"
+          @keyup.enter="register"
         />
       </div>
     </div>
@@ -38,34 +46,27 @@
 import { mapActions } from "pinia";
 import { storeMain } from "stores/storeMain";
 export default {
-  name: "LoginView",
+  name: "registerView",
   data() {
     return {
       dados: {
         email: "",
         password: "",
+        name: "",
       },
       error: {
         email: "",
         password: "",
+        name: "",
       },
     };
   },
-  watch: {
-    dados: {
-      deep: true,
-      handler(newValue) {
-        if (newValue.email) this.error.email = "";
-        if (newValue.password) this.error.password = "";
-      },
-    },
-  },
   methods: {
-    ...mapActions(storeMain, ["postLogin"]),
-    logar() {
-      if (this.validarLogin()) this.postLogin(this.dados);
+    ...mapActions(storeMain, ["postRegister"]),
+    register() {
+      if (this.validarRegister()) this.postRegister(this.dados);
     },
-    validarLogin() {
+    validarRegister() {
       if (!this.dados.email.length > 0) {
         console.log("* Campo obrigatório.");
         this.error.email = "* Campo obrigatório.";

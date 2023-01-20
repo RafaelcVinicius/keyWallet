@@ -12,24 +12,22 @@
         />
 
         <q-toolbar-title>
-          <q-btn
-            style="background: #4c84ec"
-            flat
-            to="/"
-            label="Key wallet"
-            class="m-1r"
-          />
+          <q-btn style="background: #4c84ec" flat to="/" label="Key wallet" />
         </q-toolbar-title>
-
-        <q-btn unelevated to="/login" label="Entrar" no-caps class="m1" />
-        <q-btn
-          color="white"
-          text-color="blue"
-          unelevated
-          to="/register"
-          label="Registre-se"
-          no-caps
-        />
+        <div v-if="!userLogado.id">
+          <q-btn unelevated to="/login" label="Entrar" no-caps class="m-1r" />
+          <q-btn
+            color="white"
+            text-color="blue"
+            unelevated
+            to="/register"
+            label="Registre-se"
+            no-caps
+          />
+        </div>
+        <div v-else>
+          <q-btn unelevated @click="deslogar" label="Sair" no-caps />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -54,6 +52,8 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
+import { storeMain } from "stores/storeMain";
+import { mapActions, mapState } from "pinia";
 
 const linksList = [
   {
@@ -70,7 +70,18 @@ export default defineComponent({
   components: {
     EssentialLink,
   },
+  computed: {
+    ...mapState(storeMain, ["userLogado"]),
+  },
+  methods: {
+    ...mapActions(storeMain, ["deslogar"]),
+    ...mapActions(storeMain, ["requestUser"]),
 
+    t() {
+      this.requestUser();
+      console.log(this.requestUser);
+    },
+  },
   setup() {
     const leftDrawerOpen = ref(false);
 
