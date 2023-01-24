@@ -1,5 +1,6 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex-center flex-c">
+    <span class="p-1 font-20">Login</span>
     <div class="column items-center" style="height: 150px; width: 300px">
       <div class="col">
         <q-input

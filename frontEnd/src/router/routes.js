@@ -9,6 +9,14 @@ const routes = [
         path: "/register",
         component: () => import("pages/auth/RegisterPage.vue"),
       },
+      {
+        path: "/new-key",
+        component: () => import("pages/records/NewKey.vue"),
+      },
+      {
+        path: "/manager-key",
+        component: () => import("pages/records/ManagerKey.vue"),
+      },
     ],
   },
 
