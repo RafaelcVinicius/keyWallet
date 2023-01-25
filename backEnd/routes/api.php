@@ -27,7 +27,7 @@ Route::prefix('/')->group(function (){
         });
     });
     Route::prefix('/key-wallet')->group(function (){
-        Route::post('',           [KeyWalletController::class,                    'store'        ]);
+        Route::post('',           [KeyWalletController::class,               'store'        ]);
         Route::get('',            [KeyWalletController::class,                    'index'        ]);
         Route::get('/{id}',       [KeyWalletController::class,                    'store'        ]);
         Route::post('/{id}',      [KeyWalletController::class,                    'store'        ]);

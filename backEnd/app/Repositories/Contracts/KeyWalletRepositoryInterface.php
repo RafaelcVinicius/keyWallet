@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface KeyWalletRepositoryInterface
 {
-    // public function store(array $filters);
+    public function store(array $request);
     // public function update(array $filters);
     // public function getWallet();
     // public function getKeyWallet(int $id);
