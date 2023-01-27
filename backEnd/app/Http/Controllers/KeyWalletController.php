@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKeyWalletRequest;
 use App\Services\KeyWalletService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class KeyWalletController extends Controller
@@ -27,10 +28,10 @@ class KeyWalletController extends Controller
     // {
     //     return $this->KeyWalletService->index();
     // }
-    // public function getWallet()
-    // {
-    //     return $this->KeyWalletService->index();
-    // }
+    public function getWallet(Request $request)
+    {
+        return $this->keyWalletService->getWallet();
+    }
     // public function getKeyWallet()
     // {
     //     return $this->KeyWalletService->index();

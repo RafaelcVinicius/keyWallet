@@ -15,7 +15,14 @@ class KeyWalletRepository implements KeyWalletRepositoryInterface
     {
         DB::beginTransaction();
 
-        $keyWallet = KeyWallet::create($data["Key"]);
+        // $keyWallet = KeyWallet::create($data["Key"]);
+        $keyWallet = new KeyWallet();
+        $keyWallet->id_user = $data["Key"]["id_user"];
+        $keyWallet->key = $data["Key"]["key"];
+        $keyWallet->apelido = $data["Key"]["apelido"];
+        $keyWallet->email = $data["Key"]["email"];
+        $keyWallet->save();
+
 
         DB::commit();
         return $keyWallet;
@@ -24,10 +31,10 @@ class KeyWalletRepository implements KeyWalletRepositoryInterface
     // {
     //     return $this->KeyWalletService->index();
     // }
-    // public function getWallet()
-    // {
-    //     return $this->KeyWalletService->index();
-    // }
+    public function getWallet()
+    {
+        return Auth::user()->keyWallet;
+    }
     // public function getKeyWallet()
     // {
     //     return $this->KeyWalletService->index();

@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex-center flex-c">
-    <span class="p-1 font-20">Register</span>
+  <q-page class="flex-c flex-start flex-ac">
+    <span class="p-1 font-20 m-2t">Register</span>
     <div class="column items-center" style="height: 200px; width: 300px">
       <div class="col">
         <q-input

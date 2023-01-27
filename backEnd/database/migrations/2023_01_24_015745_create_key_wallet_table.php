@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('key_wallet', function (Blueprint $table) {
             $table->id();
             $table->string('apelido')->nullable();;
-            $table->string('email')->nullable();;
+            $table->text('email')->nullable();;
             $table->bigInteger('id_user')->unsigned();
-            $table->string('key');
+            $table->text('key');
             $table->timestamps();
 
             $table->foreign('id_user', 'fk_users')->references('id')->on('users');

@@ -5,13 +5,14 @@ export const storeMain = defineStore("storeMain", {
   id: "storeMain",
   state: () => ({
     user: {},
+    keyWallet: [],
   }),
   getters: {
     userLogado: (state) => state.user,
+    getWallet: (state) => state.keyWallet,
   },
   actions: {
     requestUser() {
-      console.log("dd");
       api
         .get("/user", {
           headers: {
@@ -40,6 +41,7 @@ export const storeMain = defineStore("storeMain", {
           console.log("error", error.response.data.message);
         });
     },
+
     postRegister(dados) {
       console.log(dados);
       api
@@ -59,6 +61,22 @@ export const storeMain = defineStore("storeMain", {
       localStorage.token = "";
       this.user = {};
       window.location.href = "/";
+    },
+
+    setWallet() {
+      api
+        .get("/key-wallet", {
+          headers: {
+            Authorization: "Bearer " + localStorage.token,
+          },
+        })
+        .then((res) => {
+          this.keyWallet = res.data.data;
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Crypt;
 
@@ -20,7 +21,7 @@ class KeyWalletResource extends JsonResource
             'apelido'       => $this->apelido,
             'email'         => Crypt::decrypt($this->email),
             'key'           => Crypt::decrypt($this->key),
-            'created_at'    => $this->created_at,
+            'created_at'    => Carbon::parse($this->created_at)->format('d/m/Y'),
             'updated_at'    => $this->updated_at,
         ];
     }

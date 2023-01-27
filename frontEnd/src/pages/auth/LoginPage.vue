@@ -1,8 +1,8 @@
 <template>
-  <q-page class="flex-center flex-c">
-    <span class="p-1 font-20">Login</span>
-    <div class="column items-center" style="height: 150px; width: 300px">
-      <div class="col">
+  <q-page class="flex-c flex-start flex-ac">
+    <span class="p-1 font-20 m-2t">Login</span>
+    <div class="column items-center" style="height: 240px; width: 300px">
+      <div class="col-3">
         <q-input
           :size="30"
           outlined
@@ -11,7 +11,7 @@
           label="E-mail"
         />
       </div>
-      <div class="col">
+      <div class="col-3">
         <q-input
           :size="30"
           outlined
@@ -20,7 +20,7 @@
           @keyup.enter="logar"
         />
       </div>
-      <div class="col">
+      <div class="col-3">
         <q-btn
           color="white"
           style="background: #4c84ec"
