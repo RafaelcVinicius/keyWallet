@@ -46,8 +46,8 @@
         </q-tr>
         <q-tr v-show="props.expand" :props="props">
           <q-td colspan="100%">
-            <div class="text-left">E-mail: {{ props.row.email }}.</div>
-            <div class="text-left">Password: {{ props.row.key }}.</div>
+            <div class="text-left">E-mail: {{ props.row.email }}</div>
+            <div class="text-left">Password: {{ props.row.key }}</div>
           </q-td>
         </q-tr>
       </template>

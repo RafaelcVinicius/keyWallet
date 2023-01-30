@@ -31,6 +31,10 @@
           @keyup.enter="logar"
         />
       </div>
+      <vue-recaptcha
+        @verify="verifyMethod"
+        sitekey="6LcSgDgkAAAAAEIYq8tfU5vvb7b9eWngyVSv3hCE"
+      />
     </div>
   </q-page>
 </template>
@@ -38,6 +42,7 @@
 <script>
 import { mapActions } from "pinia";
 import { storeMain } from "stores/storeMain";
+
 export default {
   name: "LoginView",
   data() {
@@ -58,6 +63,7 @@ export default {
       handler(newValue) {
         if (newValue.email) this.error.email = "";
         if (newValue.password) this.error.password = "";
+        console.log(this.verifyMethod);
       },
     },
   },

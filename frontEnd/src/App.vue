@@ -11,7 +11,6 @@ export default defineComponent({
   name: "App",
 
   created() {
-    console.log(localStorage.token);
     if (localStorage.token.length) {
       this.requestUser();
     }
