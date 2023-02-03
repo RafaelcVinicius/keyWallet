@@ -32,6 +32,7 @@
         />
       </div>
       <vue-recaptcha
+        ref="recaptcha"
         @verify="verifyMethod"
         sitekey="6LcSgDgkAAAAAEIYq8tfU5vvb7b9eWngyVSv3hCE"
       />
@@ -50,10 +51,12 @@ export default {
       dados: {
         email: "",
         password: "",
+        reCaptcha: "",
       },
       error: {
         email: "",
         password: "",
+        reCaptcha: "",
       },
     };
   },
@@ -63,12 +66,14 @@ export default {
       handler(newValue) {
         if (newValue.email) this.error.email = "";
         if (newValue.password) this.error.password = "";
-        console.log(this.verifyMethod);
       },
     },
   },
   methods: {
     ...mapActions(storeMain, ["postLogin"]),
+    verifyMethod(e) {
+      this.dados.reCaptcha = e;
+    },
     logar() {
       if (this.validarLogin()) this.postLogin(this.dados);
     },

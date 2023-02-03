@@ -6,36 +6,22 @@ use App\Http\Requests\EditPostRequest;
 use App\Http\Requests\LoginPostRequest;
 use App\Http\Requests\RegisterPostRequest;
 use App\Models\User;
+use App\Services\LoginService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    **    logar e retornar um token
-    */
+    private $loginService;
+
+    public function __construct(LoginService $loginService)
+    {
+        $this->loginService = $loginService;
+    }
+
     public function login(LoginPostRequest $request)
     {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            $token = $user->createToken('JWT');
-
-            return response()->json([
-                'status'  => 'success',
-                'message' => 'Usuário autorizado',
-                'token'   => $token->plainTextToken
-            ], 200);
-        }
-
-        return response()->json([
-            'status'    => 'error',
-            'message'   => 'Usuário invalido',
-        ], 401);
+        return $this->loginService->login($request);
     }
 
     /*

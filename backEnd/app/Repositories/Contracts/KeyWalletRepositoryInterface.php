@@ -2,9 +2,6 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Models\Empresa;
-use Illuminate\Database\Eloquent\Collection;
-
 interface KeyWalletRepositoryInterface
 {
     public function store(array $request);
